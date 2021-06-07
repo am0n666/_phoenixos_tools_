@@ -63,38 +63,38 @@ function savelast {
 
 menuentry '$android_menuentry_name - Start with standard flags'  --class other {
 	set root=\$_root
-	linux \$osdir/kernel NORECOVERY=0 root=/dev/ram0 androidboot.selinux=permissive quiet acpi_sleep=s3_bios,s3_mode SRC=\$osdir
+	linux \$osdir/kernel NORECOVERY=0 VIRT_WIFI=0 root=/dev/ram0 androidboot.selinux=permissive quiet acpi_sleep=s3_bios,s3_mode SRC=\$osdir
 	initrd \$osdir/initrd.img
 }
 
 menuentry '$android_menuentry_name - Start with adtional cpu flags'  --class other {
 	set root=\$_root
-	linux \$osdir/kernel NORECOVERY=0 root=/dev/ram0 androidboot.selinux=permissive $adtional_cpu_flags quiet acpi_sleep=s3_bios,s3_mode SRC=\$osdir
+	linux \$osdir/kernel NORECOVERY=0 VIRT_WIFI=0 root=/dev/ram0 androidboot.selinux=permissive $adtional_cpu_flags quiet acpi_sleep=s3_bios,s3_mode SRC=\$osdir
 	initrd \$osdir/initrd.img
 }
 
 menuentry '$android_menuentry_name - Start with nouveau'  --class other {
 	set root=\$_root
-	linux \$osdir/kernel NORECOVERY=0 root=/dev/ram0 androidboot.selinux=permissive quiet acpi_sleep=s3_bios,s3_mode $nouveau SRC=\$osdir
+	linux \$osdir/kernel NORECOVERY=0 VIRT_WIFI=0 root=/dev/ram0 androidboot.selinux=permissive quiet acpi_sleep=s3_bios,s3_mode $nouveau SRC=\$osdir
 	initrd \$osdir/initrd.img
 }
 
 menuentry '$android_menuentry_name - Start with nouveau and adtional cpu flags'  --class other {
 	set root=\$_root
-	linux \$osdir/kernel NORECOVERY=0 root=/dev/ram0 androidboot.selinux=permissive quiet acpi_sleep=s3_bios,s3_mode $adtional_cpu_flags $nouveau SRC=\$osdir
+	linux \$osdir/kernel NORECOVERY=0 VIRT_WIFI=0 root=/dev/ram0 androidboot.selinux=permissive quiet acpi_sleep=s3_bios,s3_mode $adtional_cpu_flags $nouveau SRC=\$osdir
 	initrd \$osdir/initrd.img
 }
 
 
 menuentry '$android_menuentry_name - Start with nouveau and vulkan'  --class other {
 	set root=\$_root
-	linux \$osdir/kernel NORECOVERY=0 root=/dev/ram0 androidboot.selinux=permissive quiet acpi_sleep=s3_bios,s3_mode $nouveau $vulkan SRC=\$osdir
+	linux \$osdir/kernel NORECOVERY=0 VIRT_WIFI=0 root=/dev/ram0 androidboot.selinux=permissive quiet acpi_sleep=s3_bios,s3_mode $nouveau $vulkan SRC=\$osdir
 	initrd \$osdir/initrd.img
 }
 
 menuentry '$android_menuentry_name - Start with nouveau and vulkan and adtional cpu flags'  --class other {
 	set root=\$_root
-	linux \$osdir/kernel NORECOVERY=0 root=/dev/ram0 androidboot.selinux=permissive quiet acpi_sleep=s3_bios,s3_mode $adtional_cpu_flags $nouveau $vulkan SRC=\$osdir
+	linux \$osdir/kernel NORECOVERY=0 VIRT_WIFI=0 root=/dev/ram0 androidboot.selinux=permissive quiet acpi_sleep=s3_bios,s3_mode $adtional_cpu_flags $nouveau $vulkan SRC=\$osdir
 	initrd \$osdir/initrd.img
 }
 

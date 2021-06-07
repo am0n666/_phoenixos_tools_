@@ -1,0 +1,68 @@
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+SCRIPT_NAME="$(basename "${BASH_SOURCE[0]}")"
+
+function convert_path() {
+	_input="$1"
+	_output=""
+	_fch_=$(printf %.1s "$_input")
+	[ "$_fch_" = "/" ] && _output+="$_input"
+	[ ! "$_fch_" = "/" ] && _output+="`pwd`/$_input"
+	_lch_=${_output:$((${#_output}-1)):1}
+	[ "$_lch_" = "/" ] && _output="${_output:0:${#_output}-1}"
+	echo $_output
+}
+
+function get_from_path() {
+	[[ $# != 2 ]] && echo "usage: get_from_path <path> <dir|name|fullname|ext>" && return
+	theFullFilePath="$1"
+	theFileName=$(basename "$theFullFilePath")
+	extension=$([[ "$theFileName" == *.* ]] && echo ".${theFileName##*.}" || echo '')
+	# a hidden file without extenson?
+	if [ "${theFileName}" = "${extension}" ] ; then
+	# hidden file without extension.  Fixup.
+	    name=${theFileName}
+	    extension=""
+	fi
+	case "$2" in
+	    dir) echo "${theFullFilePath%/*}"; ;;
+	    name) echo "${theFileName%.*}"; ;;
+	    fullname) echo "${theFileName}"; ;;
+	    ext) echo "${extension}"; ;;
+	esac
+}
+
+function showusage() {
+	echo ""
+	echo "Usage:"
+	echo "	$SCRIPT_NAME input_gxp_file output_directory"
+	echo ""
+}
+
+INPUT_FILE="$(convert_path "$1")"
+OUTPUT_DIR="$2"
+
+if [ ! -n "$INPUT_FILE" ]; then
+	showusage
+	exit 99
+fi
+
+if [ ! -n "$OUTPUT_DIR" ]; then
+	if [ -f "$INPUT_FILE" ]; then
+		_OUTPUT_DIR="$(get_from_path "$1" name)"
+		OUTPUT_DIR="$(convert_path "$_OUTPUT_DIR")"
+		if [ ! -d "$OUTPUT_DIR" ]; then
+			mkdir -p "$OUTPUT_DIR"
+		fi
+	fi
+fi
+
+if [ ! -f "$INPUT_FILE" ]; then
+	echo "File not found: $INPUT_FILE"
+	exit 99
+fi
+
+#if [ ! -d "$OUTPUT_DIR" ]; then
+#	mkdir -p "$OUTPUT_DIR"
+#fi
+
+$DIR/bin/garca x -o"${OUTPUT_DIR}" -aoa -p'2Xj^7pAz=UN#5%=#%XQAFY-tik^jh97sz6C&2x8-dH+xPjhoz#BzP5**uk+7XH7w' "$INPUT_FILE"

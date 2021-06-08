@@ -1,5 +1,5 @@
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
-if [ -d "$DIR/workdir ]; then
+if [ -d "$DIR/workdir" ]; then
 	rm -rf "$DIR/workdir"
 fi
